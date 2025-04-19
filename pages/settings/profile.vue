@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form";
 import { z } from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
+import { Button } from "~/components/ui/button";
 
 const breadcrumbs = useBreadcrumbs();
 breadcrumbs.value = [
@@ -39,20 +40,18 @@ const { handleSubmit } = useForm({
   validationSchema: schema,
 });
 
+const { editProfile, loading, verifyEmail } = useProfile();
 const submit = handleSubmit(async (values: ProfileEditForm) => {
-  console.log(values);
+  await editProfile(values);
 });
 
 definePageMeta({
   title: "Update Password",
   middleware: ["auth"],
 });
-
-// const { layoutName } = useLayout();
 </script>
 
 <template>
-  <!-- <NuxtLayout :name="layoutName"> -->
   <SettingsLayout>
     <div class="flex flex-col space-y-6">
       <HeadingSmall
@@ -100,22 +99,23 @@ definePageMeta({
         <div v-if="!user?.email_verified_at">
           <p class="-mt-4 text-sm text-muted-foreground">
             Your email address is unverified.
-            <!-- <Button
-              :href="route('verification.send')"
+            <Button
               class="text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500"
+              variant="link"
+              :disabled="loading"
+              @click.prevent="verifyEmail"
             >
               Click here to resend the verification email.
-            </Button> -->
+            </Button>
           </p>
         </div>
 
         <div class="flex items-center gap-4">
-          <!-- <Button :disabled="form.processing">Save</Button> -->
+          <Button :disabled="loading">Save</Button>
         </div>
       </form>
     </div>
 
     <DeleteUser />
   </SettingsLayout>
-  <!-- </NuxtLayout> -->
 </template>

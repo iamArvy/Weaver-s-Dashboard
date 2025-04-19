@@ -1,10 +1,13 @@
-import type { AuthForm, RegisterForm, User } from "~/types";
+import type { AuthForm, RegisterForm, ResetPasswordForm, User } from "~/types";
 import { useCustomAuth } from "./auth";
 
 type AuthComposable = () => {
   signIn: (data: AuthForm) => Promise<void>;
   signUp: (data: RegisterForm) => Promise<void>;
   signOut: () => void;
+  forgotPassword: (data: { email: string }) => void;
+  resetPassword: (data: ResetPasswordForm) => void;
+  confirmPassword?: (data: { password: string }) => void;
   init: () => Promise<void>;
   loading: Ref<boolean>;
 };

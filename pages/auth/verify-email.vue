@@ -2,9 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-vue-next";
 
-const loading = ref(false);
-const submit = () => {
-  console.log("submit");
+const { verifyEmail, loading } = useProfile();
+const submit = async () => {
+  await verifyEmail();
 };
 
 definePageMeta({
@@ -13,15 +13,13 @@ definePageMeta({
   middleware: ["auth"],
 });
 
-const authBaseProps = useAuthBaseProps();
-authBaseProps.value = [
-  {
-    title: "Verify email",
-    description:
-      "Please verify your email address by clicking on the link we just emailed to you.",
-  },
-];
-
+const { setProps } = useAuthBaseProps();
+const props = {
+  title: "Verify email",
+  description:
+    "Please verify your email address by clicking on the link we just emailed to you.",
+};
+onMounted(() => setProps(props));
 const { signOut } = useAuth();
 </script>
 

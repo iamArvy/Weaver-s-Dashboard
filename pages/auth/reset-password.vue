@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { LoaderCircle } from "lucide-vue-next";
-
+import type { ResetPasswordForm } from "@/types";
 import { z } from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import {
@@ -13,13 +13,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-interface Props {
-  token: string;
-  email: string;
-}
+// interface Props {
+//   token: string;
+//   email: string;
+// }
 
-const props = defineProps<Props>();
+// const props = defineProps<Props>();
 
+const props = {
+  email: "john@example.com",
+  token: "123456",
+};
 const schema = toTypedSchema(
   z.object({
     token: z.string(),
@@ -39,24 +43,22 @@ const { handleSubmit } = useForm({
   validationSchema: schema,
 });
 
-const submit = handleSubmit(async (values) => {
-  console.log(values);
+const { resetPassword, loading } = useAuth();
+const submit = handleSubmit(async (values: ResetPasswordForm) => {
+  resetPassword(values);
 });
-
-const loading = ref(false);
 
 definePageMeta({
   title: "Reset password",
   layout: "auth-card",
 });
 
-const authBaseProps = useAuthBaseProps();
-authBaseProps.value = [
-  {
-    title: "Reset password",
-    description: "Please enter your new password below",
-  },
-];
+const { setProps } = useAuthBaseProps();
+const authProps = {
+  title: "Reset password",
+  description: "Please enter your new password below",
+};
+onMounted(() => setProps(authProps));
 </script>
 
 <template>

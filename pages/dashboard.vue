@@ -19,6 +19,8 @@ const { layout } = useLayout();
 const layoutName = computed<false | LayoutKey>(() => {
   return layout.value ? (`dashboard-${layout.value}` as LayoutKey) : false;
 });
+
+// const { data: health } = useAPI('auth', '/health')
 </script>
 
 <template>

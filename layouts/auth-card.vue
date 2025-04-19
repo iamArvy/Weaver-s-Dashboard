@@ -8,10 +8,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-defineProps<{
-  title?: string;
-  description?: string;
-}>();
+const { props } = useAuthBaseProps();
 </script>
 
 <template>
@@ -31,9 +28,9 @@ defineProps<{
       <div class="flex flex-col gap-6">
         <Card class="rounded-xl">
           <CardHeader class="px-10 pb-0 pt-8 text-center">
-            <CardTitle class="text-xl">{{ title }}</CardTitle>
+            <CardTitle class="text-xl">{{ props?.title }}</CardTitle>
             <CardDescription>
-              {{ description }}
+              {{ props?.description }}
             </CardDescription>
           </CardHeader>
           <CardContent class="px-10 py-8">

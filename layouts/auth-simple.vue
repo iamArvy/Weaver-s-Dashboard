@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import AppLogoIcon from "@/components/AppLogoIcon.vue";
 
-defineProps<{
-  title?: string;
-  description?: string;
-}>();
+const { props } = useAuthBaseProps();
 </script>
 
 <template>
@@ -25,12 +22,12 @@ defineProps<{
                 class="size-9 fill-current text-[var(--foreground)] dark:text-white"
               />
             </div>
-            <span class="sr-only">{{ title }}</span>
+            <span class="sr-only">{{ props?.title }}</span>
           </NuxtLink>
           <div class="space-y-2 text-center">
-            <h1 class="text-xl font-medium">{{ title }}</h1>
+            <h1 class="text-xl font-medium">{{ props?.title }}</h1>
             <p class="text-center text-sm text-muted-foreground">
-              {{ description }}
+              {{ props?.description }}
             </p>
           </div>
         </div>

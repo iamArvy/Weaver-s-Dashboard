@@ -1,10 +1,9 @@
 <script setup lang="ts">
 // import { useForm } from '@';
-import { ref } from "vue";
+// import { ref } from "vue";
 
 // Components
 import HeadingSmall from "@/components/HeadingSmall.vue";
-import InputError from "@/components/InputError.vue";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,26 +16,36 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { z } from "zod";
+import { toTypedSchema } from "@vee-validate/zod";
+// const passwordInput = ref<HTMLInputElement | null>(null);
 
-const passwordInput = ref<HTMLInputElement | null>(null);
+const schema = toTypedSchema(
+  z.object({
+    password: z.string().min(8).max(32),
+  })
+);
 
-// const form = useForm({
-//     password: '',
-// });
-
-const deleteUser = () => {
-  // form.delete(route('profile.destroy'), {
-  //     preserveScroll: true,
-  //     onSuccess: () => closeModal(),
-  //     onError: () => passwordInput.value?.focus(),
-  //     onFinish: () => form.reset(),
-  // });
-};
-
+const { handleSubmit, resetForm } = useForm({
+  initialValues: {
+    password: "",
+  },
+  validationSchema: schema,
+});
+const { deleteAccount, loading } = useProfile();
+const deleteUser = handleSubmit(async (values: { password: string }) => {
+  await deleteAccount(values);
+  closeModal();
+});
 const closeModal = () => {
-  // form.clearErrors();
-  // form.reset();
+  resetForm();
 };
 </script>
 
@@ -72,9 +81,9 @@ const closeModal = () => {
               </DialogDescription>
             </DialogHeader>
 
-            <div class="grid gap-2">
-              <Label for="password" class="sr-only">Password</Label>
-              <!-- <Input
+            <!-- <div class="grid gap-2"> -->
+            <!-- <Label for="password" class="sr-only">Password</Label> -->
+            <!-- <Input
                 id="password"
                 ref="passwordInput"
                 v-model="form.password"
@@ -82,9 +91,24 @@ const closeModal = () => {
                 name="password"
                 placeholder="Password"
               /> -->
-              <!-- <InputError :message="form.errors.password" /> -->
-            </div>
-
+            <!-- <InputError :message="form.errors.password" /> -->
+            <!-- </div> -->
+            <FormField v-slot="{ componentField }" name="password">
+              <FormItem>
+                <FormLabel>Password</FormLabel>
+                <FormControl>
+                  <Input
+                    id="password"
+                    type="password"
+                    v-bind="componentField"
+                    required
+                    autocomplete="username"
+                    placeholder="Password"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            </FormField>
             <DialogFooter class="gap-2">
               <DialogClose as-child>
                 <Button variant="secondary" @click="closeModal">
@@ -92,9 +116,9 @@ const closeModal = () => {
                 </Button>
               </DialogClose>
 
-              <!-- <Button variant="destructive" :disabled="form.processing">
+              <Button variant="destructive" :disabled="loading">
                 <button type="submit">Delete account</button>
-              </Button> -->
+              </Button>
             </DialogFooter>
           </form>
         </DialogContent>

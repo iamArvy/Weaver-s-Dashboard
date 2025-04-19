@@ -77,9 +77,24 @@ export type UpdatePasswordForm = {
 export type AuthBaseProps = {
   title: string;
   description: string;
-  // icon: LucideIcon;
 };
 
 export type Appearance = "light" | "dark" | "system";
 export type Layout = "sidebar" | "topbar";
 export type BreadcrumbItemType = BreadcrumbItem;
+
+export const API_NAMES = [
+  "default",
+  "auth",
+  "authProtected",
+  // register more apis as needed
+] as const;
+
+export type ApiName = (typeof API_NAMES)[number];
+
+export type ResetPasswordForm = {
+  email: string;
+  password: string;
+  password_confirmation: string;
+  token: string;
+};

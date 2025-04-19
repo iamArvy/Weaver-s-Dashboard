@@ -25,17 +25,23 @@ const { handleSubmit } = useForm({
   validationSchema: schema,
 });
 
-const submit = handleSubmit(async (values) => {
-  console.log(values);
+const { confirmPassword, loading } = useAuth();
+const submit = handleSubmit(async (values: { password: string }) => {
+  if (confirmPassword) await confirmPassword(values);
 });
-
-const loading = ref(false);
 
 definePageMeta({
   middleware: "auth",
   title: "Confirm password",
-  layout: "auth",
+  layout: "auth-card",
 });
+
+const { setProps } = useAuthBaseProps();
+const props = {
+  title: "Confirm Password",
+  description: "Enter your password below for confirmation.",
+};
+onMounted(() => setProps(props));
 </script>
 
 <template>

@@ -46,13 +46,12 @@ definePageMeta({
   layout: "auth-split",
 });
 
-const authBaseProps = useAuthBaseProps();
-authBaseProps.value = [
-  {
-    title: "Create an account",
-    description: "Enter your details below to create your account",
-  },
-];
+const { setProps } = useAuthBaseProps();
+const props = {
+  title: "Create an account",
+  description: "Enter your details below to create your account",
+};
+onMounted(() => setProps(props));
 </script>
 
 <template>

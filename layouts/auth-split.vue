@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import AppLogoIcon from "@/components/AppLogoIcon.vue";
-const name = "AppName"; // Replace with your app name
+const name = "Weaver's Dashboard"; // Replace with your app name
 const quote = {
   message: "Quote message", // Replace with your quote message
   author: "Quote author", // Replace with your quote author
 };
 
-defineProps<{
-  title?: string;
-  description?: string;
-}>();
+const { props } = useAuthBaseProps();
 </script>
 
 <template>
@@ -21,7 +18,7 @@ defineProps<{
     >
       <div class="absolute inset-0 bg-zinc-900" />
       <NuxtLink
-        :to="{ name: 'auth-register' }"
+        :to="{ name: 'index' }"
         class="relative z-20 flex items-center text-lg font-medium"
       >
         <AppLogoIcon class="mr-2 size-8 fill-current text-white" />
@@ -39,11 +36,11 @@ defineProps<{
         class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]"
       >
         <div class="flex flex-col space-y-2 text-center">
-          <h1 v-if="title" class="text-xl font-medium tracking-tight">
-            {{ title }}
+          <h1 v-if="props?.title" class="text-xl font-medium tracking-tight">
+            {{ props.title }}
           </h1>
-          <p v-if="description" class="text-sm text-muted-foreground">
-            {{ description }}
+          <p v-if="props?.description" class="text-sm text-muted-foreground">
+            {{ props.description }}
           </p>
         </div>
         <slot />

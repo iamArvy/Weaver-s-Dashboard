@@ -39,13 +39,12 @@ definePageMeta({
   title: "Login",
   layout: "auth-card",
 });
-const authBaseProps = useAuthBaseProps();
-authBaseProps.value = [
-  {
-    title: "Log in to your account",
-    description: "Enter your email and password below to log in",
-  },
-];
+const { setProps } = useAuthBaseProps();
+const props = {
+  title: "Log in to your account",
+  description: "Enter your email and password below to log in",
+};
+onMounted(() => setProps(props));
 </script>
 
 <template>

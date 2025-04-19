@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import SettingsLayout from "~/layouts/settings.vue";
 import HeadingSmall from "@/components/HeadingSmall.vue";
-// import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
@@ -44,8 +44,9 @@ const { handleSubmit } = useForm({
   validationSchema: schema,
 });
 
-const updatePassword = handleSubmit(async (values: UpdatePasswordForm) => {
-  console.log(values);
+const { updatePassword, loading } = useProfile();
+const submit = handleSubmit(async (values: UpdatePasswordForm) => {
+  await updatePassword(values);
 });
 
 definePageMeta({
@@ -62,7 +63,7 @@ definePageMeta({
         description="Ensure your account is using a long, random password to stay secure"
       />
 
-      <form class="space-y-6" method="post" @submit.prevent="updatePassword">
+      <form class="space-y-6" method="post" @submit.prevent="submit">
         <FormField v-slot="{ componentField }" name="current_password">
           <FormItem>
             <FormLabel>Current Password</FormLabel>
@@ -117,7 +118,7 @@ definePageMeta({
           </FormItem>
         </FormField>
         <div class="flex items-center gap-4">
-          <!-- <Button :disabled="form.processing">Save password</Button> -->
+          <Button :disabled="loading">Save password</Button>
         </div>
       </form>
     </div>
