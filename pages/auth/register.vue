@@ -13,6 +13,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
+useAppTitle("Register");
+
 const schema = toTypedSchema(
   z
     .object({

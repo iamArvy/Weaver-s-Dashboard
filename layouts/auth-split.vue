@@ -2,8 +2,9 @@
 import AppLogoIcon from "@/components/AppLogoIcon.vue";
 const name = "Weaver's Dashboard"; // Replace with your app name
 const quote = {
-  message: "Quote message", // Replace with your quote message
-  author: "Quote author", // Replace with your quote author
+  message:
+    "People usually speak about it as though luck is something that just happens to you. It's not. Luck is fifty percent circumstance and fifty percent your own ability to grasp it. Luck is something you have to make happen yourself.", // Replace with your quote message
+  author: "Sunny", // Replace with your quote author
 };
 
 const { props } = useAuthBaseProps();

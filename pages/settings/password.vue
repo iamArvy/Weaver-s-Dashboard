@@ -13,6 +13,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+useAppTitle("Password Settings");
 
 const breadcrumbs = useBreadcrumbs();
 breadcrumbs.value = [

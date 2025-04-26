@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { LayoutKey } from "#build/types/layouts";
 import PlaceholderPattern from "../components/PlaceholderPattern.vue";
+useAppTitle("Dashboard");
 const breadcrumbs = useBreadcrumbs();
 breadcrumbs.value = [{ title: "Dashboard", href: "/dashboard" }];
 definePageMeta({

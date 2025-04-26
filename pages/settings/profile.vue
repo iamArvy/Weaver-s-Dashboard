@@ -15,6 +15,7 @@ import {
 import { z } from "zod";
 import { toTypedSchema } from "@vee-validate/zod";
 import { Button } from "~/components/ui/button";
+useAppTitle("Profile Settings");
 
 const breadcrumbs = useBreadcrumbs();
 breadcrumbs.value = [

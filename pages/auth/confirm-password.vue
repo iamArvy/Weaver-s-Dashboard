@@ -12,6 +12,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+useAppTitle("Confirm Password");
+
 const schema = toTypedSchema(
   z.object({
     password: z.string().min(8),

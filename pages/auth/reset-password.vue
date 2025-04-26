@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+useAppTitle("Reset Password");
 // interface Props {
 //   token: string;
 //   email: string;

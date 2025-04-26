@@ -13,6 +13,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+useAppTitle("Forgot Password");
+
 const schema = toTypedSchema(
   z.object({
     email: z.string().email(),

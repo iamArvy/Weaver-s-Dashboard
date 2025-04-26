@@ -4,6 +4,7 @@ import HeadingSmall from "@/components/HeadingSmall.vue";
 import SettingsLayout from "~/layouts/settings.vue";
 import { Monitor, Moon, Sun, type LucideIcon } from "lucide-vue-next";
 import type { Appearance, Layout } from "~/types";
+useAppTitle("Appearance Setting");
 
 const breadcrumbs = useBreadcrumbs();
 breadcrumbs.value = [

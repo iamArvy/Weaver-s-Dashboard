@@ -14,6 +14,8 @@ import {
 } from "@/components/ui/form";
 import type { AuthForm } from "~/types";
 
+useAppTitle("Login");
+
 const schema = toTypedSchema(
   z.object({
     email: z.string().email(),

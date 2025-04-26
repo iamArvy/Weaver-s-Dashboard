@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
 import { LoaderCircle } from "lucide-vue-next";
-
+useAppTitle("Verify Email");
 const { verifyEmail, loading } = useProfile();
 const submit = async () => {
   await verifyEmail();
